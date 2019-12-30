@@ -18,7 +18,7 @@ fn main() {
         .unwrap();
 
     info!("Starting heartbeat");
-    
+
     // Setup config details
     let hosts = vec!("kafka:9092".to_owned());
     let topic = "my-topic";
@@ -59,6 +59,6 @@ fn main() {
     // Join threads
     producer.join().expect("The producer thread has panicked");
     consumer.join().expect("The consumer thread has panicked");
-    
+
     info!("Stopped");
 }

@@ -17,17 +17,17 @@ pub fn run(hosts: Vec<String>, topic: &str, group: &str, stop: Receiver<i32>) {
     loop {
         match stop.try_recv() {
             Ok(value) => {
-                debug!("Consumer got a message: {}", value);  
+                debug!("Consumer got a message: {}", value);
 
                 if value == 1 {
                     info!("Stopping consumer");
                     break;
                 }
-                
-                warn!("Unexpected value {}", value);                
+
+                warn!("Unexpected value {}", value);
             },
             Err(TryRecvError::Empty) => {
-                debug!("Tried to recv from empty channel");             
+                debug!("Tried to recv from empty channel");
             },
             Err(TryRecvError::Disconnected) => {
                 panic!("Channel unexpectedly disconected");
@@ -45,7 +45,7 @@ pub fn run(hosts: Vec<String>, topic: &str, group: &str, stop: Receiver<i32>) {
                     Err(e) => {
                         error!("Error converting string: {}", e);
                     },
-                };  
+                };
             }
 
             consumer.consume_messageset(ms).unwrap();

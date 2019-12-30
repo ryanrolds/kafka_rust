@@ -18,17 +18,17 @@ pub fn run(hosts: Vec<String>, topic: &str, stop: Receiver<i32>) {
     loop {
         match stop.try_recv() {
             Ok(value) => {
-                debug!("Producer got a message: {}", value);  
+                debug!("Producer got a message: {}", value);
 
                 if value == 1 {
                     info!("Stopping producer");
                     break;
                 }
-                
-                warn!("Unexpected value {}", value);                
+
+                warn!("Unexpected value {}", value);
             },
             Err(TryRecvError::Empty) => {
-                debug!("Tried to recv from empty channel");             
+                debug!("Tried to recv from empty channel");
             },
             Err(TryRecvError::Disconnected) => {
                 panic!("Channel unexpectedly disconected");
@@ -45,6 +45,6 @@ pub fn run(hosts: Vec<String>, topic: &str, stop: Receiver<i32>) {
         let wait = time::Duration::from_millis(500);
         thread::sleep(wait);
     }
-    
+
     info!("Stopped producer");
 }
