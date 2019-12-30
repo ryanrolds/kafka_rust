@@ -26,4 +26,4 @@ services:
       context: ./kafka_heartbeat
     volumes:
       - "./kafka_heartbeat:/usr/src/kafka_heartbeat"
-    command: ["cargo", "run"]
+    command: ["cargo" ,"run"]
